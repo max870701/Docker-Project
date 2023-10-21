@@ -9,6 +9,9 @@ from sklearn import ensemble
 from sklearn import model_selection
 from sklearn import metrics
 
+# Save Model
+from joblib import dump
+
 def read_csv(file_name):
     return pd.read_csv(file_name)
 
@@ -147,4 +150,9 @@ if __name__ == "__main__":
     data_preprocessor(train_df, test_df)
 
     print("Training model...")
-    train_model(train_df, test_df, test_target_df)
+    best_model = train_model(train_df, test_df, test_target_df)
+
+    print("Saving model...")
+    dump(best_model, './models/titanic-model.joblib')
+
+    print("Done")

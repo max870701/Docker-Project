@@ -4,6 +4,9 @@ FROM python:3.9-slim
 # Assign the working directory inside the container
 WORKDIR /app
 
+# Create Model Directory
+RUN mkdir -p /app/models
+
 # Copy required files first
 COPY requirements.txt .
 
