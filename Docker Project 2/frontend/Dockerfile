@@ -11,5 +11,8 @@ COPY frontend.py /app
 COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
+# 開放 8501 端口
+EXPOSE 8501
+
 # 啟動 Streamlit 應用
-CMD ["streamlit", "run", "frontend.py"]
+CMD ["streamlit", "run", "frontend.py", "--server.port", "8501", "--server.address", "0.0.0.0"]

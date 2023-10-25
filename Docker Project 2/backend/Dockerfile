@@ -12,8 +12,11 @@ COPY api.py /app
 COPY requirements.txt /app
 COPY preprocessing.py /app
 
+# 開放 8000 端口
+EXPOSE 8000
+
 # 安裝依賴
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 啟動伺服器
-CMD ["uvicorn", "api:app", "--reload"]
+CMD ["uvicorn", "api:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]

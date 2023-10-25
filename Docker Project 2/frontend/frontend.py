@@ -146,7 +146,7 @@ if train_file:
             processed_test_data = convert_special_floats_to_str(test_data.to_dict(orient="records")) if st.session_state.test_data is not None else None
 
             # Send the request
-            st.session_state.preprocess_response = requests.post("http://127.0.0.1:8000/preprocess/", 
+            st.session_state.preprocess_response = requests.post("http://backend:8000/preprocess/", 
                                                 json={
                                                     "data": processed_train_data,
                                                     "test_data": processed_test_data
@@ -189,7 +189,7 @@ if train_file:
     with training_model:
         st.header("Train your model")
         if st.button("Train"):
-            st.session_state.train_response = requests.post("http://127.0.0.1:8000/train/", 
+            st.session_state.train_response = requests.post("http://backend:8000/train/", 
                                     json={
                                         "data": st.session_state.train_data.to_dict(orient="records"), 
                                         "features": st.session_state.features, 
@@ -213,10 +213,10 @@ if train_file:
         st.header("Download your model")
         st.session_state.file_type = st.selectbox("Choose a file type", ["pkl", "joblib"])
         if st.button("Download"):
-            st.session_state.download_link = f"http://127.0.0.1:8000/download_model/{st.session_state.model_id}/{st.session_state.file_type}"
+            st.session_state.download_link = f"http://localhost:8000/download_model/{st.session_state.model_id}/{st.session_state.file_type}"
             st.write(f"[Download .{st.session_state.file_type} file]({st.session_state.download_link})")
         if st.button("Save Training Info"):
-            train_info_response = requests.get(f"http://127.0.0.1:8000/get_train_info/{st.session_state.model_id}")
+            train_info_response = requests.get(f"http://backend:8000/get_train_info/{st.session_state.model_id}")
             st.session_state.train_info = train_info_response.json()
             st.write("Training Information:")
             st.write(st.session_state.train_info)
