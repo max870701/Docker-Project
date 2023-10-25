@@ -26,10 +26,6 @@ def data_creator(df):
     df['IsAlone'] = np.where(df['FamilySize'] == 1, 1, 0)
     # 構建 title 的 feature
     df['Title'] = df['Name'].str.split(', ', expand=True)[1].str.split('.', expand=True)[0]
-    # 構建 FareBin 特徵
-    # df['FareBin'] = pd.qcut(df['Fare'], 4)
-    # 構建 AgeBin 特徵
-    # df['AgeBin'] = pd.cut(df['Age'].astype(int), 5)
 
 def data_convertor(df):
     # 使用頻率編碼

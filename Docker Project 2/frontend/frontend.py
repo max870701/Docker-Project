@@ -15,13 +15,6 @@ select_model = st.container()
 training_model = st.container()
 download_model = st.container()
 
-# models = {
-#     "Random Forest Regressor": "RandomForestRegressor",
-#     "Random Forest Classifier": "RandomForestClassifier",
-#     "Linear Regression": "LinearRegression",
-#     "Logistic Regression": "LogisticRegression"
-# }
-
 # Initialize session_state variables
 if 'models' not in st.session_state:
     st.session_state.models = {
@@ -56,8 +49,7 @@ if 'download_link' not in st.session_state:
     st.session_state.download_link = ''
 if 'train_info' not in st.session_state:
     st.session_state.train_info = {}
-# if 'train_model' not in st.session_state:
-#     st.session_state.train_model = False
+
 
 with header:
     st.header("Welcome to the Machine Learning Web App !")
@@ -105,7 +97,6 @@ def load_data(file):
     else:
         st.error('File format is not supported.')
         return None
-    # data = data.astype({col: float for col in data.select_dtypes(include=[np.float64]).columns})
     return data
 
 with upload:
@@ -168,8 +159,6 @@ if train_file:
     # 4
     with features_target:
         st.header("Features and Target")
-        # features = st.multiselect("Choose your input features", train_data.columns.tolist())
-        # target = st.selectbox("Choose your target column", [col for col in train_data.columns if col not in features])
         st.session_state.features = st.multiselect(
                                     "Choose your input features",
                                     st.session_state.train_data.columns.tolist()

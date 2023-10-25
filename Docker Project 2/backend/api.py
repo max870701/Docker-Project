@@ -149,12 +149,8 @@ async def preprocess_data(data_payload: dict):
         test_data = pd.DataFrame(converted_test_data)
     else:
         data, test_data = train_test_split(tmp, test_size=0.2)
-    # print(data.isna().sum())
-    # print(test_data.isna().sum() if test_data is not None else None)
 
     processed_data, processed_test_data = data_preprocessing(data, test_data)
-    # print(processed_data.isna().sum())
-    # print(processed_test_data.isna().sum() if processed_test_data is not None else None)
 
     return {
         "data": convert_special_floats_to_str(processed_data.to_dict(orient="records")),
